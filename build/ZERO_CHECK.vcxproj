@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{E18A7975-1F77-3A4C-9F17-84F0C1C520BA}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ZERO_CHECK</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\..\include;D:\onedrive\ABI\Programming\opencmiss\zinc_wrapper\include;D:\onedrive\ABI\Programming\opencmiss\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\..\include;D:\onedrive\ABI\Programming\opencmiss\zinc_wrapper\include;D:\onedrive\ABI\Programming\opencmiss\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\..\include;D:\onedrive\ABI\Programming\opencmiss\zinc_wrapper\include;D:\onedrive\ABI\Programming\opencmiss\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\..\include;D:\onedrive\ABI\Programming\opencmiss\zinc_wrapper\include;D:\onedrive\ABI\Programming\opencmiss\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\a4962593ff8887c076bb46c98135ceee\generate.stamp.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -HD:/onedrive/ABI/Programming/opencmiss -BD:/onedrive/ABI/Programming/opencmiss/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/onedrive/ABI/Programming/opencmiss/build/CMakeFiles/a4962593ff8887c076bb46c98135ceee/generate.stamp.rule;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincConfig.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincConfigVersion.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibraryDepends-release.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibraryDepends.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibrarySetup.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVConfig-version.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVConfig.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVModules.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\onedrive\ABI\Programming\opencmiss\CMakeLists.txt;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\onedrive\ABI\Programming\opencmiss\zinc_wrapper\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\generate.stamp;D:\onedrive\ABI\Programming\opencmiss\build\zinc_wrapper\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -HD:/onedrive/ABI/Programming/opencmiss -BD:/onedrive/ABI/Programming/opencmiss/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/onedrive/ABI/Programming/opencmiss/build/CMakeFiles/a4962593ff8887c076bb46c98135ceee/generate.stamp.rule;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincConfig.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincConfigVersion.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibraryDepends-release.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibraryDepends.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibrarySetup.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVConfig-version.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVConfig.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVModules.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\onedrive\ABI\Programming\opencmiss\CMakeLists.txt;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\onedrive\ABI\Programming\opencmiss\zinc_wrapper\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\generate.stamp;D:\onedrive\ABI\Programming\opencmiss\build\zinc_wrapper\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -HD:/onedrive/ABI/Programming/opencmiss -BD:/onedrive/ABI/Programming/opencmiss/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/onedrive/ABI/Programming/opencmiss/build/CMakeFiles/a4962593ff8887c076bb46c98135ceee/generate.stamp.rule;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincConfig.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincConfigVersion.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibraryDepends-release.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibraryDepends.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibrarySetup.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVConfig-version.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVConfig.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVModules.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\onedrive\ABI\Programming\opencmiss\CMakeLists.txt;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\onedrive\ABI\Programming\opencmiss\zinc_wrapper\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\generate.stamp;D:\onedrive\ABI\Programming\opencmiss\build\zinc_wrapper\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -HD:/onedrive/ABI/Programming/opencmiss -BD:/onedrive/ABI/Programming/opencmiss/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/onedrive/ABI/Programming/opencmiss/build/CMakeFiles/a4962593ff8887c076bb46c98135ceee/generate.stamp.rule;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincConfig.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincConfigVersion.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibraryDepends-release.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibraryDepends.cmake;C:\Opencmiss\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows\cmake\ZincLibrarySetup.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVConfig-version.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVConfig.cmake;D:\Downloads\opencv\opencv\allbuild\OpenCVModules.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\onedrive\ABI\Programming\opencmiss\CMakeLists.txt;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\onedrive\ABI\Programming\opencmiss\zinc_wrapper\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\onedrive\ABI\Programming\opencmiss\build\CMakeFiles\generate.stamp;D:\onedrive\ABI\Programming\opencmiss\build\zinc_wrapper\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

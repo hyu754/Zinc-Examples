@@ -1,0 +1,4 @@
+D:/onedrive/ABI/Programming/opencmiss/build/CMakeFiles/Zinc_Augment.dir
+D:/onedrive/ABI/Programming/opencmiss/build/CMakeFiles/ALL_BUILD.dir
+D:/onedrive/ABI/Programming/opencmiss/build/CMakeFiles/ZERO_CHECK.dir
+D:/onedrive/ABI/Programming/opencmiss/build/zinc_wrapper/CMakeFiles/zinc_wrapper.dir

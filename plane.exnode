@@ -1,0 +1,23 @@
+ Group name: plane
+ !#nodeset nodes
+ #Fields=1
+ 1) coordinates, coordinate, rectangular cartesian, #Components=3
+  x.  Value index=1, #Derivatives=0, #Versions=1
+  y.  Value index=2, #Derivatives=0, #Versions=1
+  z.  Value index=3, #Derivatives=0, #Versions=1
+ Node: 1
+ -1.858387654437815e+001
+ 5.332523457116638e+001
+ 4.275216827593094e+001
+ Node: 22
+ 8.339542692183965e+000
+ 2.576676735040372e+001
+ -8.096898504953860e+000
+ Node: 63
+ 4.912300655608662e+001
+ 8.993286148465641e+001
+ 5.501844794424930e+001
+ Node: 85
+ 7.838031192522729e+001
+ 6.753958988245535e+001
+ 9.757039141388471e+000
