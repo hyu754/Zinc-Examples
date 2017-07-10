@@ -29,7 +29,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/onedrive/ABI/Programming/opencmiss/build/zinc_wrapper/cmake_install.cmake")
+  include("D:/GitHub/zincAR/build/zinc_wrapper/cmake_install.cmake")
 
 endif()
 
@@ -41,5 +41,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/onedrive/ABI/Programming/opencmiss/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/GitHub/zincAR/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

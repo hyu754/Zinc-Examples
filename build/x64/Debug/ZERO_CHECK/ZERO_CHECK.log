@@ -1,11 +1,3 @@
 ﻿  Checking Build System
-  CMake does not need to re-run because D:/onedrive/ABI/Programming/opencmiss/build/CMakeFiles/generate.stamp is up-to-date.
-  CMake is re-running because D:/onedrive/ABI/Programming/opencmiss/build/zinc_wrapper/CMakeFiles/generate.stamp is out-of-date.
-    the file 'D:/onedrive/ABI/Programming/opencmiss/zinc_wrapper/CMakeLists.txt'
-    is newer than 'D:/onedrive/ABI/Programming/opencmiss/build/zinc_wrapper/CMakeFiles/generate.stamp.depend'
-    result='-1'
-  C:/Opencmiss/OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows/OpenCMISS-Zinc-3.0.1.r11306-amd64-Windows/cmake
-  zinc.r11306.3.0.1
-  -- Configuring done
-  -- Generating done
-  -- Build files have been written to: D:/onedrive/ABI/Programming/opencmiss/build
+  CMake does not need to re-run because D:/GitHub/zincAR/build/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/GitHub/zincAR/build/zinc_wrapper/CMakeFiles/generate.stamp is up-to-date.
