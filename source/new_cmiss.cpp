@@ -30,24 +30,12 @@
 
 #include "zinc_wrapper.hpp"
 
+//Global video capture pointer
 cv::VideoCapture *g_p_cap;
-class MyClass
-{
-public:
-	MyClass();
-	~MyClass();
 
-private:
+//Global zinc_wrapper pointer
+zinc_wrapper *g_ZW_ptr;
 
-};
-
-MyClass::MyClass()
-{
-}
-
-MyClass::~MyClass()
-{
-}
 
 using namespace OpenCMISS::Zinc;
 using namespace std;
@@ -68,65 +56,22 @@ cv::Mat in_image = cv::Mat(cv::Size(640, 480), CV_8UC3);// = cv::Mat(cv::Size(64
 double time_global = 0;
 IplImage *imgO = cvCreateImage(cvSize(640, 480), IPL_DEPTH_8U, 3);
 
-void getScreenShot(IplImage *imgO)
-{
-	int width = imgO->width;
-	int height = imgO->height;
-	int hIndex = 0;
-	int wIndex = 0;
-	int iout, jout;
-
-	unsigned char* imageData = (unsigned char*)malloc(width*height * 3);
-	IplImage *img = cvCreateImage(cvSize(width, height), IPL_DEPTH_8U, 3);
-
-	glReadPixels(0, 0, width - 1, height - 1, GL_RGB, GL_UNSIGNED_BYTE, imageData);
-
-	for (int i = 0; i < width*height * 3; i += 3, wIndex++)
-	{
-		if (wIndex >= width)
-		{
-			wIndex = 0;
-			hIndex++;
-		}
-
-		((uchar *)(img->imageData + hIndex*img->widthStep))[wIndex*img->nChannels + 0] = imageData[i + 2]; // B
-		((uchar *)(img->imageData + hIndex*img->widthStep))[wIndex*img->nChannels + 1] = imageData[i + 1]; // G
-		((uchar *)(img->imageData + hIndex*img->widthStep))[wIndex*img->nChannels + 2] = imageData[i]; // R
-
-		// vertically flip the image
-		iout = -hIndex + height - 1;
-		jout = wIndex;
-
-		((uchar *)(imgO->imageData + iout*imgO->widthStep))[jout*imgO->nChannels + 0] =
-			((uchar *)(img->imageData + hIndex*img->widthStep))[wIndex*img->nChannels + 0];// B
-		((uchar *)(imgO->imageData + iout*imgO->widthStep))[jout*imgO->nChannels + 1] =
-			((uchar *)(img->imageData + hIndex*img->widthStep))[wIndex*img->nChannels + 1];// G
-		((uchar *)(imgO->imageData + iout*imgO->widthStep))[jout*imgO->nChannels + 2] =
-			((uchar *)(img->imageData + hIndex*img->widthStep))[wIndex*img->nChannels + 2];// R
-	}
-
-	free(imageData);
-	cvReleaseImage(&img);
-}
 
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glutSolidTeapot(1.5);
+	//glutSolidTeapot(1.5);
 
 	//global_scene.viewAll();
 	//global_scene.renderScene();
+	g_ZW_ptr->render_scene(true);
+	
 
-	std::cout << i << std::endl;
 	glFlush();
 
 }
 
 
-void run_view_test(void){
-
-	std::cout << "testing" << std::endl;
-}
 
 
 void run_view(void){
@@ -514,22 +459,38 @@ int main(int argc, char** argv)
 	double cam_height = g_p_cap->get(cv::CAP_PROP_FRAME_HEIGHT);
 #endif // 0
 
-	
+	int width, height;
+	width = 1000;
+	height = 1000;
 	
 	//Initalizing glut
 	glutInit(&argc, argv);
 
-	glutInitDisplayMode(GLUT_DOUBLE);
+	//glutInitDisplayMode(GLUT_DOUBLE);
 	glutInitDisplayMode(GLUT_RGB);
 
-	glutInitWindowSize(100, 100);
+	
+	glutInitWindowSize(width, height);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("HelloTeapot");
+	glutCreateWindow("Zinc Visualiser");
 	
 	zinc_wrapper ZW("region_1");
-
 	
+	ZW.read_exfile("plane.exfile"); //Field name is heart
+	ZW.add_geometry_to_scene("plane", "coordinates");
+	ZW.set_scene_viewer_size(width,height);
 
+
+
+	glutSolidTeapot(1.5);
+
+
+
+
+
+
+	////Assign global zinc_wrapper pointer so glut can access it
+	g_ZW_ptr = &ZW;
 #if 0
 
 	//
@@ -763,7 +724,9 @@ int main(int argc, char** argv)
 	std::cout << "size of nodes: " << size_node << std::endl;
 
 #endif // 0
-	glutIdleFunc(run_view_test);
+	
+	glutDisplayFunc(display);
+	glutIdleFunc(display);
 	glutMainLoop();
 
 	return 0;
