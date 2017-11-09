@@ -5,7 +5,7 @@ Examples for [CMGUI](http://cmiss.bioeng.auckland.ac.nz/development/examples/a/i
 
 ## Examples
 
--Viewing the Brain, skull and associated skin [Example_ai]{http://cmiss.bioeng.auckland.ac.nz/development/examples/a/ai/index.html}
+- [Example ai: Viewing the Brain, skull and associated skin ](http://cmiss.bioeng.auckland.ac.nz/development/examples/a/ai/index.html)
 
 
 
