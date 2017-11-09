@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
-project( DisplayImage )
+project( ZincExamples)
 find_package(Zinc 	REQUIRED)
-find_package( OpenCV REQUIRED )
+
 
 #add a new varialbe for the zinc library, change depending on version
 SET(ZINC_LIB zinc.r11306.3.0.1)
@@ -14,14 +14,40 @@ include_directories(${CMAKE_SOURCE_DIR}/include/)
 #link libraries
 link_directories(${Zinc_DIR}/../lib)
 
-
-
 #add zinc wrapper
 add_subdirectory(zinc_wrapper)
 
-#display some variables
-message(${Zinc_DIR})
-message(${ZINC_LIB})
+#add cmgui examples
+add_executable( cmgui_example_ai source/cmgui_example_ai.cpp )
 
-add_executable( Zinc_Augment source/new_cmiss.cpp )
-target_link_libraries( Zinc_Augment zinc_wrapper ${OpenCV_LIBS} ${ZINC_LIB})
+
+
+target_link_libraries( cmgui_example_ai zinc_wrapper  ${ZINC_LIB})
+
+
+
+file(GLOB exnode_list ${CMAKE_SOURCE_DIR}/geometry/examples/a/ai/cmiss_input/*.exnode)
+file(GLOB exelem_list ${CMAKE_SOURCE_DIR}/geometry/examples/a/ai/cmiss_input/*.exelem)
+#file(GLOB exfile_list ${CMAKE_SOURCE_DIR}/geometry/examples/a/ai/cmiss_input/*.exfile)
+
+message(${exelem_list})
+add_custom_target(add_geometry_dlls
+
+#ADD ZINC .ex...
+COMMAND ${CMAKE_COMMAND} -E copy ${exnode_list}           ${CMAKE_BINARY_DIR}/Debug/
+COMMAND ${CMAKE_COMMAND} -E copy ${exnode_list}           ${CMAKE_BINARY_DIR}/
+
+COMMAND ${CMAKE_COMMAND} -E copy ${exelem_list}           ${CMAKE_BINARY_DIR}/Debug/
+COMMAND ${CMAKE_COMMAND} -E copy ${exelem_list}           ${CMAKE_BINARY_DIR}/
+
+
+
+#ADD ZINC .dll
+COMMAND ${CMAKE_COMMAND} -E copy ${Zinc_DIR}/../bin/${ZINC_LIB}.dll          ${CMAKE_BINARY_DIR}/Debug/
+	
+)
+
+
+
+
+add_dependencies(cmgui_example_ai  add_geometry_dlls)

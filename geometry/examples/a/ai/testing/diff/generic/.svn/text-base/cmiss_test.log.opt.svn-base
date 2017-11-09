@@ -1,0 +1,7 @@
+--ignore-matching-lines=Xlib:  extension "RANDR" missing on display*
+--ignore-matching-lines=The version of Perl in use by the perl interpreter is: *
+--ignore-matching-lines=OpenCMISS(cmgui) version *
+--ignore-matching-lines=Copyright 1996-20.., Auckland UniServices Ltd\.
+--ignore-matching-lines=Build information: *
+--ignore-matching-lines=cmzn Memory Dump
+--ignore-matching-lines=Total allocated memory:                       0

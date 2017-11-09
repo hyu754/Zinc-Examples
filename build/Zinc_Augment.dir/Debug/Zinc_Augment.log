@@ -1,4 +1,0 @@
-﻿  new_cmiss.cpp
-D:\onedrive\ABI\Programming\opencmiss\source\new_cmiss.cpp(701): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-D:\onedrive\ABI\Programming\opencmiss\source\new_cmiss.cpp(742): warning C4101: 'outvalues' : unreferenced local variable
-  Zinc_Augment.vcxproj -> D:\GitHub\zincAR\build\Debug\Zinc_Augment.exe

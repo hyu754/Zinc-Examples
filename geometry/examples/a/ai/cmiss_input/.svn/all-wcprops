@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/cmiss/!svn/ver/11257/cmgui/examples/trunk/a/ai/cmiss_input
+END
+example_ai.com
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/cmiss/!svn/ver/11257/cmgui/examples/trunk/a/ai/cmiss_input/example_ai.com
+END
+brain_geometry.exelem
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/cmiss/!svn/ver/9423/cmgui/examples/trunk/a/ai/cmiss_input/brain_geometry.exelem
+END
+COPYRIGHT
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/cmiss/!svn/ver/9423/cmgui/examples/trunk/a/ai/cmiss_input/COPYRIGHT
+END
+head_geometry.exelem
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/cmiss/!svn/ver/9423/cmgui/examples/trunk/a/ai/cmiss_input/head_geometry.exelem
+END
+bone_geometry.exelem
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/cmiss/!svn/ver/9423/cmgui/examples/trunk/a/ai/cmiss_input/bone_geometry.exelem
+END
+head_geometry.exnode
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/cmiss/!svn/ver/9423/cmgui/examples/trunk/a/ai/cmiss_input/head_geometry.exnode
+END
+skin_geometry.exelem
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/cmiss/!svn/ver/9423/cmgui/examples/trunk/a/ai/cmiss_input/skin_geometry.exelem
+END

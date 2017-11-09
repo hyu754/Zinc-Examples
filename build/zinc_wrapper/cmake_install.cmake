@@ -1,8 +1,8 @@
-# Install script for directory: D:/onedrive/ABI/Programming/opencmiss/zinc_wrapper
+# Install script for directory: D:/GitHub/segZinc/zinc_wrapper
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files/DisplayImage")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files/ZincExamples")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

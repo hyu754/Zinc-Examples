@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="D:\GitHub\zincAR\build\CMakeFiles\5398c9f187e788e7b9e83f1fe31a25ed\generate.stamp.rule">
+    <CustomBuild Include="D:\GitHub\segZinc\build\CMakeFiles\b509324c5658214558b1b73ce7241f57\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{32CD4C7D-85C7-3CF1-92DE-C7DAE34945ED}</UniqueIdentifier>
+      <UniqueIdentifier>{36A6EBBD-56E2-3EB7-BE64-824133D21981}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

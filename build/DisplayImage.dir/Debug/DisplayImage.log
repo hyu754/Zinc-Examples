@@ -1,4 +1,0 @@
-﻿  new_cmiss.cpp
-D:\onedrive\ABI\Programming\opencmiss\new_cmiss.cpp(685): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-D:\onedrive\ABI\Programming\opencmiss\new_cmiss.cpp(726): warning C4101: 'outvalues' : unreferenced local variable
-  DisplayImage.vcxproj -> D:\onedrive\ABI\Programming\opencmiss\build\Debug\DisplayImage.exe

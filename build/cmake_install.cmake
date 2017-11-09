@@ -1,8 +1,8 @@
-# Install script for directory: D:/onedrive/ABI/Programming/opencmiss
+# Install script for directory: D:/GitHub/segZinc
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files/DisplayImage")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files/ZincExamples")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -29,7 +29,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/GitHub/zincAR/build/zinc_wrapper/cmake_install.cmake")
+  include("D:/GitHub/segZinc/build/zinc_wrapper/cmake_install.cmake")
 
 endif()
 
@@ -41,5 +41,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/GitHub/zincAR/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/GitHub/segZinc/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
