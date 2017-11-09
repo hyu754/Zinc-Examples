@@ -1,9 +1,0 @@
-﻿  Checking Build System
-  CMake is re-running because D:/GitHub/segZinc/build/CMakeFiles/generate.stamp is out-of-date.
-    the file 'D:/GitHub/segZinc/CMakeLists.txt'
-    is newer than 'D:/GitHub/segZinc/build/CMakeFiles/generate.stamp.depend'
-    result='-1'
-  D:/GitHub/segZinc/geometry/examples/a/ai/cmiss_input/bone_geometry.exelemD:/GitHub/segZinc/geometry/examples/a/ai/cmiss_input/brain_geometry.exelemD:/GitHub/segZinc/geometry/examples/a/ai/cmiss_input/head_geometry.exelemD:/GitHub/segZinc/geometry/examples/a/ai/cmiss_input/skin_geometry.exelem
-  -- Configuring done
-  -- Generating done
-  -- Build files have been written to: D:/GitHub/segZinc/build

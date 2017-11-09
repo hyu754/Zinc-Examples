@@ -1,5 +1,0 @@
-D:/GitHub/segZinc/build/CMakeFiles/cmgui_example_ai.dir
-D:/GitHub/segZinc/build/CMakeFiles/add_geometry_dlls.dir
-D:/GitHub/segZinc/build/CMakeFiles/ALL_BUILD.dir
-D:/GitHub/segZinc/build/CMakeFiles/ZERO_CHECK.dir
-D:/GitHub/segZinc/build/zinc_wrapper/CMakeFiles/zinc_wrapper.dir
