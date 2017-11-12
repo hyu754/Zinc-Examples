@@ -12,6 +12,7 @@
 #include "zinc/fieldcache.hpp"
 #include "zinc/fieldmodule.hpp"
 #include "zinc/fieldimage.hpp"
+
 #include <zinc/fieldvectoroperators.hpp>
 #include "zinc/region.hpp"
 #include "zinc/sceneviewer.hpp"
@@ -19,7 +20,9 @@
 #include "zinc/streamimage.hpp"
 #include "zinc/streamscene.hpp"
 #include "zinc/fieldconstant.hpp"
+#include "zinc/fieldlogicaloperators.hpp"
 #include "zinc/fieldmatrixoperators.hpp"
+#include "zinc/fieldmeshoperators.hpp"
 #include "zinc/fieldfiniteelement.hpp"
 #include "zinc/fieldsubobjectgroup.hpp"
 #include "zinc/fieldgroup.hpp"
@@ -72,6 +75,9 @@ public:
 
 	//sets the window attributes, more can be added
 	void set_window_attributes(double eye_point[3],double look_at[3], double up_vector[3],double view_angle);
+
+	//Integrator
+	void mesh_integrator(std::string mesh_name);
 
 	//Destructor
 	~zinc_wrapper();

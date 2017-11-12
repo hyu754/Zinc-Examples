@@ -1,0 +1,19 @@
+Faces:
+2,4..5,8..10,12..14,16..24
+Total number = 18
+gfx define field allshapes/volume_order1 coordinate_system rectangular_cartesian composite 3.16667;
+gfx define field allshapes/area_order1 coordinate_system rectangular_cartesian composite 15.1945;
+gfx define field allshapes/volume_order2 coordinate_system rectangular_cartesian composite 3.16667;
+gfx define field allshapes/area_order2 coordinate_system rectangular_cartesian composite 15.1945;
+gfx define field allshapes/volume_order3 coordinate_system rectangular_cartesian composite 3.16667;
+gfx define field allshapes/area_order3 coordinate_system rectangular_cartesian composite 15.1945;
+gfx define field allshapes/volume_order4 coordinate_system rectangular_cartesian composite 3.16667;
+gfx define field allshapes/area_order4 coordinate_system rectangular_cartesian composite 15.1945;
+gfx define field allshapes/scaled_volume_order1 coordinate_system rectangular_cartesian composite 7.125;
+gfx define field allshapes/scaled_area_order1 coordinate_system rectangular_cartesian composite 26.9104;
+gfx define field allshapes/scaled_volume_order2 coordinate_system rectangular_cartesian composite 7.125;
+gfx define field allshapes/scaled_area_order2 coordinate_system rectangular_cartesian composite 26.9104;
+gfx define field allshapes/scaled_volume_order3 coordinate_system rectangular_cartesian composite 7.125;
+gfx define field allshapes/scaled_area_order3 coordinate_system rectangular_cartesian composite 26.9104;
+gfx define field allshapes/scaled_volume_order4 coordinate_system rectangular_cartesian composite 7.125;
+gfx define field allshapes/scaled_area_order4 coordinate_system rectangular_cartesian composite 26.9104;

@@ -81,7 +81,7 @@ void zinc_wrapper::read_exnode_exelem(std::string file_name){
 	region->readFile(file_name_char_node);
 	region->readFile(file_name_char_elem);
 
-
+	
 }
 
 
@@ -102,6 +102,7 @@ void zinc_wrapper::set_scene_viewer_size(int width, int height){
 	sceneviewermodule = new Sceneviewermodule;
 	*sceneviewermodule = context->getSceneviewermodule();
 
+	
 	//Create a sceneviewer
 	sceneviewer = new Sceneviewer;
 	*sceneviewer = sceneviewermodule->createSceneviewer(OpenCMISS::Zinc::Sceneviewer::BufferingMode::BUFFERING_MODE_SINGLE, OpenCMISS::Zinc::Sceneviewer::StereoMode::STEREO_MODE_DEFAULT);
@@ -146,7 +147,7 @@ void zinc_wrapper::add_surface_to_scene(std::string geometry_name, std::string c
 
 	//Assign the coordinate to the graphics surface
 	surface.setCoordinateField(global_coordinates);
-
+	
 	//Set the name to of the graphics surface, this will be set to be geometry_name_surface
 	geometry_name = geometry_name + "surface";
 	const char * surface_name = geometry_name.c_str();
@@ -170,7 +171,7 @@ void zinc_wrapper::add_surface_to_scene(std::string geometry_name, std::string c
 
 	surface.setVisibilityFlag(true);
 
-
+	
 	
 
 #endif // 0
@@ -205,6 +206,7 @@ void zinc_wrapper::add_surface_to_scene(std::string geometry_name, std::string c
 
 
 	scene->endChange();
+	
 }
 
 void zinc_wrapper::add_line_to_scene(std::string geometry_name, std::string coordinate_name, double alpha_, std::string material,float line_width){
@@ -214,6 +216,7 @@ void zinc_wrapper::add_line_to_scene(std::string geometry_name, std::string coor
 	const char * geometry_name_char = geometry_name.c_str();
 	const char * coordinate_name_char = coordinate_name.c_str();
 	Field geo_field = fieldmodule->findFieldByName(geometry_name_char);
+	geo_field.getId();
 	global_coordinates = fieldmodule->findFieldByName(coordinate_name_char);
 	//Create material module
 	Materialmodule materialmodule = context->getMaterialmodule();
@@ -297,6 +300,7 @@ void zinc_wrapper::add_line_to_scene(std::string geometry_name, std::string coor
 void zinc_wrapper::set_background_colour(double r, double b, double g){
 	const double _c[3] = { r, b, g };
 	sceneviewer->setBackgroundColourRGB(_c);
+	
 }
 
 
@@ -452,3 +456,121 @@ void zinc_wrapper::rotate_translation_geometry(std::string geometry_name, double
 	//sceneviewer->endChange();
 
 }
+
+
+//Performs mesh integration
+void zinc_wrapper::mesh_integrator(std::string geometry_name){
+
+	//Field is exterior
+	FieldIsExterior exterior_field = fieldmodule->createFieldIsExterior();
+
+	//Find faces
+	Mesh mesh = fieldmodule->findMeshByDimension(2);
+
+	FieldGroup groupfield = fieldmodule->createFieldGroup();
+	
+	FieldElementGroup egroup = fieldmodule->createFieldElementGroup(mesh);
+	egroup.setName("exterior_group");
+	MeshGroup exterior_mesh=egroup.getMeshGroup();
+
+
+	exterior_mesh.addElementsConditional(exterior_field);
+	
+	std::cout << "Exterior face size : " << exterior_mesh.getSize() << std::endl;
+
+
+	//Find elements
+	Mesh mesh3d = fieldmodule->findMeshByDimension(3);
+
+
+	/*
+	Integration gfx
+	
+
+	gfx define field allshapes / one constant 1.0;
+	gfx define field allshapes / volume mesh_integral coordinate_field coordinates integrand_field one mesh mesh3d gaussian_quadrature numbers_of_points "4";
+	gfx define field allshapes / surface_area mesh_integral coordinate_field coordinates integrand_field one mesh exterior.mesh2d gaussian_quadrature numbers_of_points "4";
+	*/
+	//Volume
+	double one_ = 1;
+	FieldConstant one_field = fieldmodule->createFieldConstant(1,&one_);
+	Field coordinates = fieldmodule->findFieldByName("coordinates");
+	FieldMeshIntegral volume_field = fieldmodule->createFieldMeshIntegral(one_field, coordinates, mesh3d);
+	
+	//Surface
+	FieldMeshIntegral surface_field = fieldmodule->createFieldMeshIntegral(one_field, coordinates, exterior_mesh);
+
+
+	//Evaluate fields
+	Fieldcache cache = fieldmodule->createFieldcache();
+	double volume_out,surface_out;
+	volume_field.evaluateReal(cache, 1, &volume_out);
+	surface_field.evaluateReal(cache, 1, &surface_out);
+
+	std::cout << "Volume : " << volume_out << std::endl << "Surface area: " << surface_out << std::endl;
+
+
+	
+
+	//point_attribute.setLabelText(1, "hi");
+	
+		/*point_attribute.setGlyph(point_glyph);
+		volume_point.setRenderPointSize(20);*/
+		
+
+
+
+		GraphicsPoints graphics = scene->createGraphicsPoints();
+		Graphicspointattributes	attributes = graphics.getGraphicspointattributes();
+		attributes.setGlyphShapeType(Glyph::SHAPE_TYPE_CROSS);
+		
+		char volume_string[100];
+		char volume_c[20];
+		char volume_value_string[20];
+		sprintf(volume_string, "%f", volume_out);
+		strcpy(volume_c, "Volume : ");
+		strcpy(volume_value_string, volume_string);
+		strcat(volume_c, volume_value_string);
+
+
+		attributes.setLabelText(1, "asdf");
+
+		double offset_[3] = { -0, 0, 0 };
+		attributes.setLabelOffset(3, offset_);
+		//graphics.setSubgroupField(geo_field);
+	
+		
+		//Note: default base size of 0.0 would make axes invisible!
+		
+		double size_ =1;
+		attributes.setBaseSize(1, &size_);
+	
+
+}
+
+
+
+//Element elem;
+
+///*mesh_exterior.destroyElementsConditional(exterior_field);*/
+//Elementiterator el_iterator = mesh.createElementiterator();
+//Fieldcache cache = fieldmodule->createFieldcache();
+
+//elem = el_iterator.next();
+//
+//while (elem.isValid()){
+//	cache.setElement(elem);
+//	double isexterior;
+//	exterior_field.evaluateReal(cache, 1, &isexterior);
+//	std::cout << isexterior << std::endl;
+
+//	if (isexterior != 1){
+//		//mesh_exterior.addElement(elem);
+//		//elem.
+//		///eee.addElement(elem);
+//		int stat_ = exterior_mesh.addElement(elem);
+//		std::cout << "stat : " << stat_ << std::endl;
+//		//std::cout << "Elem size : " << mesh_exterior.getSize() << std::endl;
+//	}
+//	elem = el_iterator.next();
+//}

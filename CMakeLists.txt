@@ -19,31 +19,40 @@ add_subdirectory(zinc_wrapper)
 
 #add cmgui examples
 add_executable( cmgui_example_ai source/cmgui_example_ai.cpp )
+add_executable( cmgui_example_mesh_integration source/cmgui_example_mesh_integration.cpp )
+
 
 
 
 target_link_libraries( cmgui_example_ai zinc_wrapper  ${ZINC_LIB})
+target_link_libraries( cmgui_example_mesh_integration zinc_wrapper  ${ZINC_LIB})
 
 
 
-file(GLOB exnode_list ${CMAKE_SOURCE_DIR}/geometry/examples/a/ai/cmiss_input/*.exnode)
-file(GLOB exelem_list ${CMAKE_SOURCE_DIR}/geometry/examples/a/ai/cmiss_input/*.exelem)
+
+file(GLOB exnode_list 
+	${CMAKE_SOURCE_DIR}/geometry/examples/a/ai/cmiss_input/*.exnode
+	${CMAKE_SOURCE_DIR}/geometry/examples/a/mesh_integration/cmiss_input/*.exnode
+)
+file(GLOB exelem_list 
+	${CMAKE_SOURCE_DIR}/geometry/examples/a/ai/cmiss_input/*.exelem
+	${CMAKE_SOURCE_DIR}/geometry/examples/a/mesh_integration/cmiss_input/*.exelem
+)
 #file(GLOB exfile_list ${CMAKE_SOURCE_DIR}/geometry/examples/a/ai/cmiss_input/*.exfile)
 
-message(${exelem_list})
+
 add_custom_target(add_geometry_dlls
 
-#ADD ZINC .ex...
-COMMAND ${CMAKE_COMMAND} -E copy ${exnode_list}           ${CMAKE_BINARY_DIR}/Debug/
-COMMAND ${CMAKE_COMMAND} -E copy ${exnode_list}           ${CMAKE_BINARY_DIR}/
+	#ADD ZINC .ex...
+	COMMAND ${CMAKE_COMMAND} -E copy ${exnode_list}           ${CMAKE_BINARY_DIR}/Debug/
+	COMMAND ${CMAKE_COMMAND} -E copy ${exnode_list}           ${CMAKE_BINARY_DIR}/
 
-COMMAND ${CMAKE_COMMAND} -E copy ${exelem_list}           ${CMAKE_BINARY_DIR}/Debug/
-COMMAND ${CMAKE_COMMAND} -E copy ${exelem_list}           ${CMAKE_BINARY_DIR}/
+	COMMAND ${CMAKE_COMMAND} -E copy ${exelem_list}           ${CMAKE_BINARY_DIR}/Debug/
+	COMMAND ${CMAKE_COMMAND} -E copy ${exelem_list}           ${CMAKE_BINARY_DIR}/
 
 
-
-#ADD ZINC .dll
-COMMAND ${CMAKE_COMMAND} -E copy ${Zinc_DIR}/../bin/${ZINC_LIB}.dll          ${CMAKE_BINARY_DIR}/Debug/
+	#ADD ZINC .dll
+	COMMAND ${CMAKE_COMMAND} -E copy ${Zinc_DIR}/../bin/${ZINC_LIB}.dll          ${CMAKE_BINARY_DIR}/Debug/
 	
 )
 
@@ -51,3 +60,4 @@ COMMAND ${CMAKE_COMMAND} -E copy ${Zinc_DIR}/../bin/${ZINC_LIB}.dll          ${C
 
 
 add_dependencies(cmgui_example_ai  add_geometry_dlls)
+add_dependencies(cmgui_example_mesh_integration  add_geometry_dlls)

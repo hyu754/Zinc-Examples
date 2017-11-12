@@ -70,10 +70,10 @@ void display(void)
 
 	//global_scene.viewAll();
 	//global_scene.renderScene();
-	double angle = 0.2; // rads
+	double angle = 0.00012; // rads
 	double R[3][3] = { { cos(angle), 0.0, sin(angle) }, { 0.0, 1.0, 0.0 }, { -sin(angle), 0.0, cos(angle) } };
 	double T[3] = {0,0,0 };
-	//g_ZW_ptr->rotate_translation_geometry("head", R, T, true);
+	g_ZW_ptr->rotate_translation_geometry("allshapes", R, T, true);
 	
 	g_ZW_ptr->render_scene(true);
 	
@@ -110,30 +110,16 @@ int main(int argc, char** argv)
 	zinc_wrapper ZW("region_1");
 	ZW.set_scene_viewer_size(width, height);
 
-
-	//Read in geometry
-	ZW.read_exnode_exelem("head_geometry");
-	ZW.read_exelement("brain_geometry");
-	ZW.read_exelement("bone_geometry");
-	ZW.read_exelement("skin_geometry");
-
-	//Add geometry to scene
-	ZW.add_line_to_scene("brain", "coordinates", 1, "magenta", 1);
-	ZW.add_line_to_scene("bone", "coordinates", 1, "magenta", 1);
-	ZW.add_line_to_scene("skin", "coordinates", 1, "white", 1);
+	ZW.read_exnode_exelem("allshapes");
 	
-	ZW.add_surface_to_scene("brain", "coordinates", 0.2, "blue");
-	ZW.add_surface_to_scene("bone", "coordinates", 0.6, "green");
-	ZW.add_surface_to_scene("skin", "coordinates", 0.2, "orange");
-
-	double eye_point[3] = { 340.627 ,1641.13 ,3.64701 };
-	double up_vector[3] = { -0.0108309, 0.0890675 ,0.995967 };
-	double look_at[3] = { 182.683, 218.039 ,129.194 };
-	double angle = 24.2458;
-	//ZW.set_window_attributes(eye_point, look_at,up_vector, angle);
+	ZW.add_line_to_scene("allshapes", "coordinates", 1, "yellow", 1);
+	ZW.add_surface_to_scene("allshapes", "coordinates", 0.2, "blue");
+	ZW.mesh_integrator("allshapes");
 
 	//Assign global zinc_wrapper pointer so glut can access it
 	g_ZW_ptr = &ZW;
+
+
 
 	//Add display function will loop through 
 	glutDisplayFunc(display);
