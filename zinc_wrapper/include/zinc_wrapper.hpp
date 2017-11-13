@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 #include "zinc/context.hpp"
 #include "zinc/element.hpp"
@@ -60,6 +61,9 @@ public:
 
 	//Add line to scene
 	void add_line_to_scene(std::string geometry_name, std::string coordinate_name, double alpha_, std::string material,float line_width);
+
+	//Add node to scene
+	void add_node_to_scene(std::string geometry_name, std::string coordinate_name, double alpha_, std::string material, float node_size);
 
 	//Sets and renders scene
 	void render_scene(bool view_all);

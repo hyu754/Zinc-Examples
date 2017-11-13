@@ -21,6 +21,8 @@ zinc_wrapper::zinc_wrapper(std::string context_name)
 	//Create a context
 	context = new Context(temp_char);
 
+
+
 	//Create a region
 	region = new Region;
 	*region = context->getDefaultRegion();
@@ -32,6 +34,12 @@ zinc_wrapper::zinc_wrapper(std::string context_name)
 	//Create a scene
 	scene = new Scene;
 	*scene = region->getScene();
+
+	//Define standard glyph 
+	context->getGlyphmodule().defineStandardGlyphs();
+
+	//Define standard materials
+	context->getMaterialmodule().defineStandardMaterials();
 	////Create a fieldmodule
 	//fieldmodule = new Fieldmodule;
 	//*fieldmodule = region->getFieldmodule();
@@ -81,7 +89,7 @@ void zinc_wrapper::read_exnode_exelem(std::string file_name){
 	region->readFile(file_name_char_node);
 	region->readFile(file_name_char_elem);
 
-	
+
 }
 
 
@@ -102,7 +110,7 @@ void zinc_wrapper::set_scene_viewer_size(int width, int height){
 	sceneviewermodule = new Sceneviewermodule;
 	*sceneviewermodule = context->getSceneviewermodule();
 
-	
+
 	//Create a sceneviewer
 	sceneviewer = new Sceneviewer;
 	*sceneviewer = sceneviewermodule->createSceneviewer(OpenCMISS::Zinc::Sceneviewer::BufferingMode::BUFFERING_MODE_SINGLE, OpenCMISS::Zinc::Sceneviewer::StereoMode::STEREO_MODE_DEFAULT);
@@ -115,11 +123,11 @@ void zinc_wrapper::set_scene_viewer_size(int width, int height){
 	Scenefiltermodule filter_module = context->getScenefiltermodule();
 	Scenefilter graphics_filter = filter_module.createScenefilterVisibilityFlags();
 	sceneviewer->setScenefilter(graphics_filter);
-	
+
 	sceneviewer->setScene(*scene);
 
 	sceneviewer->setViewportSize(width, height);
-	sceneviewer->setLightingTwoSided(true);
+	//sceneviewer->setLightingTwoSided(true);
 }
 
 //Add a geometry to scene
@@ -147,7 +155,7 @@ void zinc_wrapper::add_surface_to_scene(std::string geometry_name, std::string c
 
 	//Assign the coordinate to the graphics surface
 	surface.setCoordinateField(global_coordinates);
-	
+
 	//Set the name to of the graphics surface, this will be set to be geometry_name_surface
 	geometry_name = geometry_name + "surface";
 	const char * surface_name = geometry_name.c_str();
@@ -171,8 +179,8 @@ void zinc_wrapper::add_surface_to_scene(std::string geometry_name, std::string c
 
 	surface.setVisibilityFlag(true);
 
-	
-	
+
+
 
 #endif // 0
 
@@ -206,12 +214,16 @@ void zinc_wrapper::add_surface_to_scene(std::string geometry_name, std::string c
 
 
 	scene->endChange();
-	
+
 }
 
-void zinc_wrapper::add_line_to_scene(std::string geometry_name, std::string coordinate_name, double alpha_, std::string material,float line_width){
+
+void zinc_wrapper::add_line_to_scene(std::string geometry_name, std::string coordinate_name, double alpha_, std::string material, float line_width){
 
 	fieldmodule->beginChange();
+
+
+
 
 	const char * geometry_name_char = geometry_name.c_str();
 	const char * coordinate_name_char = coordinate_name.c_str();
@@ -225,6 +237,8 @@ void zinc_wrapper::add_line_to_scene(std::string geometry_name, std::string coor
 
 
 	scene->beginChange();
+
+
 #if 1
 	//Create a surface 
 	GraphicsLines lines = scene->createGraphicsLines();
@@ -244,7 +258,7 @@ void zinc_wrapper::add_line_to_scene(std::string geometry_name, std::string coor
 	//Materialmodule materialmodule = context->getMaterialmodule();
 
 	//Define standard materials, i.e., green, blue, etc.
-	materialmodule.defineStandardMaterials();
+
 
 
 	Material newMaterial = materialmodule.findMaterialByName(material.c_str());
@@ -259,6 +273,12 @@ void zinc_wrapper::add_line_to_scene(std::string geometry_name, std::string coor
 	}
 
 	lines.setVisibilityFlag(true);
+
+
+
+	//
+
+
 
 
 #endif // 0
@@ -295,12 +315,65 @@ void zinc_wrapper::add_line_to_scene(std::string geometry_name, std::string coor
 	scene->endChange();
 }
 
+void zinc_wrapper::add_node_to_scene(std::string geometry_name, std::string coordinate_name, double alpha_, std::string material, float node_size){
+
+	fieldmodule->beginChange();
+
+
+
+
+	const char * geometry_name_char = geometry_name.c_str();
+	const char * coordinate_name_char = coordinate_name.c_str();
+	Field geo_field = fieldmodule->findFieldByName(geometry_name_char);
+	geo_field.getId();
+	global_coordinates = fieldmodule->findFieldByName(coordinate_name_char);
+	//Create material module
+	Materialmodule materialmodule = context->getMaterialmodule();
+	fieldmodule->endChange();
+
+
+
+	scene->beginChange();
+
+
+
+
+	GraphicsPoints nodes = scene->createGraphicsPoints();
+
+
+
+	nodes.setCoordinateField(global_coordinates);
+
+	//Set the name to of the graphics surface, this will be set to be geometry_name_surface
+	geometry_name = geometry_name + "node";
+	const char * node_name = geometry_name.c_str();
+	nodes.setName(node_name);
+	nodes.setFieldDomainType(Field::DOMAIN_TYPE_NODES);
+
+	Graphicspointattributes attributes = nodes.getGraphicspointattributes();
+	attributes.setGlyphShapeType(Glyph::SHAPE_TYPE_SPHERE);
+	double base_[3] = { node_size, node_size, node_size };
+	attributes.setBaseSize(3, base_);
+
+	Material newMaterial = materialmodule.findMaterialByName(material.c_str());
+	newMaterial.setAttributeReal(Material::ATTRIBUTE_ALPHA, alpha_);
+
+	if (!nodes.setMaterial(newMaterial)){
+		std::cout << "Surface colour is not set " << std::endl;
+	}
+
+	nodes.setVisibilityFlag(true);
+	scene->endChange();
+
+}
+
+
 
 //
 void zinc_wrapper::set_background_colour(double r, double b, double g){
 	const double _c[3] = { r, b, g };
 	sceneviewer->setBackgroundColourRGB(_c);
-	
+
 }
 
 
@@ -321,13 +394,13 @@ void zinc_wrapper::render_scene(bool view_all){
 	//sceneviewer->endChange();
 	//scene->endChange();
 
-	
+
 
 	sceneviewer->renderScene();
 
 }
 
-void zinc_wrapper::set_window_attributes(double eye_point[3], double look_at[3],double up_vector[3],double angle){
+void zinc_wrapper::set_window_attributes(double eye_point[3], double look_at[3], double up_vector[3], double angle){
 
 
 	sceneviewer->setEyePosition(eye_point);
@@ -335,7 +408,7 @@ void zinc_wrapper::set_window_attributes(double eye_point[3], double look_at[3],
 
 	sceneviewer->setViewAngle(angle);
 	sceneviewer->setLookatPosition(look_at);
-	
+
 }
 
 
@@ -460,7 +533,7 @@ void zinc_wrapper::rotate_translation_geometry(std::string geometry_name, double
 
 //Performs mesh integration
 void zinc_wrapper::mesh_integrator(std::string geometry_name){
-
+	//fieldmodule->beginChange();
 	//Field is exterior
 	FieldIsExterior exterior_field = fieldmodule->createFieldIsExterior();
 
@@ -468,14 +541,14 @@ void zinc_wrapper::mesh_integrator(std::string geometry_name){
 	Mesh mesh = fieldmodule->findMeshByDimension(2);
 
 	FieldGroup groupfield = fieldmodule->createFieldGroup();
-	
+
 	FieldElementGroup egroup = fieldmodule->createFieldElementGroup(mesh);
 	egroup.setName("exterior_group");
-	MeshGroup exterior_mesh=egroup.getMeshGroup();
+	MeshGroup exterior_mesh = egroup.getMeshGroup();
 
 
 	exterior_mesh.addElementsConditional(exterior_field);
-	
+
 	std::cout << "Exterior face size : " << exterior_mesh.getSize() << std::endl;
 
 
@@ -485,7 +558,7 @@ void zinc_wrapper::mesh_integrator(std::string geometry_name){
 
 	/*
 	Integration gfx
-	
+
 
 	gfx define field allshapes / one constant 1.0;
 	gfx define field allshapes / volume mesh_integral coordinate_field coordinates integrand_field one mesh mesh3d gaussian_quadrature numbers_of_points "4";
@@ -493,58 +566,79 @@ void zinc_wrapper::mesh_integrator(std::string geometry_name){
 	*/
 	//Volume
 	double one_ = 1;
-	FieldConstant one_field = fieldmodule->createFieldConstant(1,&one_);
+	FieldConstant one_field = fieldmodule->createFieldConstant(1, &one_);
 	Field coordinates = fieldmodule->findFieldByName("coordinates");
 	FieldMeshIntegral volume_field = fieldmodule->createFieldMeshIntegral(one_field, coordinates, mesh3d);
-	
+
 	//Surface
 	FieldMeshIntegral surface_field = fieldmodule->createFieldMeshIntegral(one_field, coordinates, exterior_mesh);
 
 
 	//Evaluate fields
 	Fieldcache cache = fieldmodule->createFieldcache();
-	double volume_out,surface_out;
+	double volume_out, surface_out;
 	volume_field.evaluateReal(cache, 1, &volume_out);
 	surface_field.evaluateReal(cache, 1, &surface_out);
 
 	std::cout << "Volume : " << volume_out << std::endl << "Surface area: " << surface_out << std::endl;
 
 
-	
+
 
 	//point_attribute.setLabelText(1, "hi");
+
+	/*point_attribute.setGlyph(point_glyph);
+	volume_point.setRenderPointSize(20);*/
+
+
+
+
+
+	char volume_string[100];
+	char volume_c[20];
+	char volume_value_string[20];
+	sprintf(volume_string, "%f", volume_out);
+	strcpy(volume_c, "Volume : ");
+	strcpy(volume_value_string, volume_string);
+	strcat(volume_c, volume_value_string);
+
+	/*
+	Display volume
+	*/
+	GraphicsPoints volume_text_node = scene->createGraphicsPoints();
+	volume_text_node.setFieldDomainType(Field::DomainType::DOMAIN_TYPE_POINT);
+	volume_text_node.setScenecoordinatesystem(Scenecoordinatesystem::SCENECOORDINATESYSTEM_NORMALISED_WINDOW_FIT_LEFT);
+	Graphicspointattributes	attributes = volume_text_node.getGraphicspointattributes();
+	double offset_[3] = { -0.95, 0.9, 0 };
+	attributes.setLabelOffset(3, offset_);
+	attributes.setLabelText(1, volume_c);
+	attributes.setGlyphShapeType(Glyph::SHAPE_TYPE_INVALID);
+	double size_ = 1;
+	attributes.setBaseSize(1, &size_);
+
+
+	/*
+	Display surface area
+	*/
+	std::string surface_string = "Surface area : " + std::to_string(surface_out);
+
+
+	GraphicsPoints surface_text_node = scene->createGraphicsPoints();
+	surface_text_node.setFieldDomainType(Field::DomainType::DOMAIN_TYPE_POINT);
+	surface_text_node.setScenecoordinatesystem(Scenecoordinatesystem::SCENECOORDINATESYSTEM_NORMALISED_WINDOW_FIT_LEFT);
+	Graphicspointattributes	surface_attributes = surface_text_node.getGraphicspointattributes();
+	double surface_offset_[3] = { -0.95, 0.8, 0 };
+	surface_attributes.setLabelOffset(3, surface_offset_);
+	surface_attributes.setLabelText(1, surface_string.c_str());
+	surface_attributes.setGlyphShapeType(Glyph::SHAPE_TYPE_INVALID);
 	
-		/*point_attribute.setGlyph(point_glyph);
-		volume_point.setRenderPointSize(20);*/
-		
+	surface_attributes.setBaseSize(1, &size_);
+
+	surface_text_node.setMaterial(context->getMaterialmodule().Materialmodule::findMaterialByName("green"));
 
 
 
-		GraphicsPoints graphics = scene->createGraphicsPoints();
-		Graphicspointattributes	attributes = graphics.getGraphicspointattributes();
-		attributes.setGlyphShapeType(Glyph::SHAPE_TYPE_CROSS);
-		
-		char volume_string[100];
-		char volume_c[20];
-		char volume_value_string[20];
-		sprintf(volume_string, "%f", volume_out);
-		strcpy(volume_c, "Volume : ");
-		strcpy(volume_value_string, volume_string);
-		strcat(volume_c, volume_value_string);
 
-
-		attributes.setLabelText(1, "asdf");
-
-		double offset_[3] = { -0, 0, 0 };
-		attributes.setLabelOffset(3, offset_);
-		//graphics.setSubgroupField(geo_field);
-	
-		
-		//Note: default base size of 0.0 would make axes invisible!
-		
-		double size_ =1;
-		attributes.setBaseSize(1, &size_);
-	
 
 }
 

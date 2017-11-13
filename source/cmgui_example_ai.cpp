@@ -118,6 +118,8 @@ int main(int argc, char** argv)
 	ZW.read_exelement("skin_geometry");
 
 	//Add geometry to scene
+	
+
 	ZW.add_line_to_scene("brain", "coordinates", 1, "magenta", 1);
 	ZW.add_line_to_scene("bone", "coordinates", 1, "magenta", 1);
 	ZW.add_line_to_scene("skin", "coordinates", 1, "white", 1);
@@ -126,6 +128,7 @@ int main(int argc, char** argv)
 	ZW.add_surface_to_scene("bone", "coordinates", 0.6, "green");
 	ZW.add_surface_to_scene("skin", "coordinates", 0.2, "orange");
 
+ZW.add_node_to_scene("skin", "coordinates", 1, "orange", 1);
 	double eye_point[3] = { 340.627 ,1641.13 ,3.64701 };
 	double up_vector[3] = { -0.0108309, 0.0890675 ,0.995967 };
 	double look_at[3] = { 182.683, 218.039 ,129.194 };

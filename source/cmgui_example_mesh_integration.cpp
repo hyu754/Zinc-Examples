@@ -111,12 +111,14 @@ int main(int argc, char** argv)
 	ZW.set_scene_viewer_size(width, height);
 
 	ZW.read_exnode_exelem("allshapes");
-	
-	ZW.add_line_to_scene("allshapes", "coordinates", 1, "yellow", 1);
-	ZW.add_surface_to_scene("allshapes", "coordinates", 0.2, "blue");
 	ZW.mesh_integrator("allshapes");
+	ZW.add_line_to_scene("allshapes", "coordinates", 1, "white", 1);
+	ZW.add_node_to_scene("allshapes", "coordinates", 1, "orange", 0.1);
+	//ZW.add_surface_to_scene("allshapes", "coordinates", 0.2, "blue");
+	
 
 	//Assign global zinc_wrapper pointer so glut can access it
+	//ZW.set_background_colour(1, 0, 0);
 	g_ZW_ptr = &ZW;
 
 
