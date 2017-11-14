@@ -71,9 +71,10 @@ void display(void)
 	//global_scene.viewAll();
 	//global_scene.renderScene();
 	double angle = 0.00012; // rads
-	double R[3][3] = { { cos(angle), 0.0, sin(angle) }, { 0.0, 1.0, 0.0 }, { -sin(angle), 0.0, cos(angle) } };
+	double Rz[3][3] = { { cos(angle), 0.0, sin(angle) }, { 0.0, 1.0, 0.0 }, { -sin(angle), 0.0, cos(angle) } };
+	double Rx[3][3] = { { cos(angle), sin(angle), 0.0 }, { -sin(angle), cos(angle), 0.0 }, { 0.0, 0.0, 1.0 } };
 	double T[3] = {0,0,0 };
-	g_ZW_ptr->rotate_translation_geometry("allshapes", R, T, true);
+	//g_ZW_ptr->rotate_translation_geometry("mesh", Rx, T, true);
 	
 	g_ZW_ptr->render_scene(true);
 	
@@ -110,16 +111,27 @@ int main(int argc, char** argv)
 	zinc_wrapper ZW("region_1");
 	ZW.set_scene_viewer_size(width, height);
 
-	ZW.read_exnode_exelem("allshapes");
-	ZW.mesh_integrator("allshapes");
-	ZW.add_line_to_scene("allshapes", "coordinates", 1, "white", 1);
-	ZW.add_node_to_scene("allshapes", "coordinates", 1, "orange", 0.1);
+	ZW.read_exnode_exelem("mesh");
+	ZW.read_exdata("data");
+	//ZW.mesh_integrator("allshapes");
+	ZW.add_line_to_scene("mesh", "coordinates", 1, "white", 1);
+	ZW.add_node_to_scene("mesh", "coordinates", 1, "orange", 0.1);
+	ZW.add_data_to_scene("", "data_coordinates", 1, "orange", 0.1);
 	//ZW.add_surface_to_scene("allshapes", "coordinates", 0.2, "blue");
 	
-
-	//ZW.set_viewer_2d();
+	
 	//Assign global zinc_wrapper pointer so glut can access it
 	//ZW.set_background_colour(1, 0, 0);
+	double up_vec[3] = { 1,0,0 };
+	double eye_point[3] = { 0, 0, 0 };
+	double look_at[3] = { 0, -1, 0 };
+	double up_vector[3] = { 1, 0, 0 };
+	double angle = 0;
+	//Look at the x-z plane
+	ZW.set_window_attributes(eye_point, look_at, up_vector, angle);
+	
+	ZW.optimise_1d();
+
 	g_ZW_ptr = &ZW;
 
 

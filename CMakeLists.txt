@@ -20,23 +20,27 @@ add_subdirectory(zinc_wrapper)
 #add cmgui examples
 add_executable( cmgui_example_ai source/cmgui_example_ai.cpp )
 add_executable( cmgui_example_mesh_integration source/cmgui_example_mesh_integration.cpp )
+add_executable( cmgui_example_optimisation_fitting-1D-linear  source/cmgui_example_optimisation_fitting-1D-linear.cpp )
+
 
 
 
 
 target_link_libraries( cmgui_example_ai zinc_wrapper  ${ZINC_LIB})
 target_link_libraries( cmgui_example_mesh_integration zinc_wrapper  ${ZINC_LIB})
-
+target_link_libraries(cmgui_example_optimisation_fitting-1D-linear zinc_wrapper ${ZINC_LIB})
 
 
 
 file(GLOB exnode_list 
 	${CMAKE_SOURCE_DIR}/geometry/examples/a/ai/cmiss_input/*.exnode
 	${CMAKE_SOURCE_DIR}/geometry/examples/a/mesh_integration/cmiss_input/*.exnode
+	${CMAKE_SOURCE_DIR}/geometry/examples/a/optimisation/fitting-1D-linear/cmiss_input/*.exnode
 )
 file(GLOB exelem_list 
 	${CMAKE_SOURCE_DIR}/geometry/examples/a/ai/cmiss_input/*.exelem
 	${CMAKE_SOURCE_DIR}/geometry/examples/a/mesh_integration/cmiss_input/*.exelem
+	${CMAKE_SOURCE_DIR}/geometry/examples/a/optimisation/fitting-1D-linear/cmiss_input/*.exelem
 )
 #file(GLOB exfile_list ${CMAKE_SOURCE_DIR}/geometry/examples/a/ai/cmiss_input/*.exfile)
 
@@ -61,3 +65,4 @@ add_custom_target(add_geometry_dlls
 
 add_dependencies(cmgui_example_ai  add_geometry_dlls)
 add_dependencies(cmgui_example_mesh_integration  add_geometry_dlls)
+add_dependencies(cmgui_example_optimisation_fitting-1D-linear add_geometry_dlls)

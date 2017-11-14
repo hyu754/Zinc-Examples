@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/cmiss/!svn/ver/10891/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/testing/ndiff/generic
+END
+fitted-qn.exnode
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/cmiss/!svn/ver/10116/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/testing/ndiff/generic/fitted-qn.exnode
+END
+cmiss_test.log
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/cmiss/!svn/ver/10116/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/testing/ndiff/generic/cmiss_test.log
+END
+fitted-lsq.exnode
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/cmiss/!svn/ver/10116/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/testing/ndiff/generic/fitted-lsq.exnode
+END
+fitted-qn.exnode.opt
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/cmiss/!svn/ver/9423/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/testing/ndiff/generic/fitted-qn.exnode.opt
+END
+cmiss_test.log.opt
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/cmiss/!svn/ver/10891/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/testing/ndiff/generic/cmiss_test.log.opt
+END
+fitted-lsq.exnode.opt
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/cmiss/!svn/ver/9423/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/testing/ndiff/generic/fitted-lsq.exnode.opt
+END

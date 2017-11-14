@@ -104,6 +104,19 @@ void zinc_wrapper::read_exelement(std::string file_name){
 }
 
 
+void zinc_wrapper::read_exdata(std::string file_name){
+	std::string data_string = file_name + ".exnode";
+	int read_status= region->readFile(data_string.c_str());
+	if (read_status == 0){
+		data_string = file_name + ".exdata";
+		read_status = region->readFile(data_string.c_str());
+		if (read_status == 0){
+			std::cout << "Error reading data file. Check file name. " << std::endl;
+		}
+	}
+
+}
+
 //Set sceneviewer view port size
 void zinc_wrapper::set_scene_viewer_size(int width, int height){
 	//Create sceneviewermodule
@@ -359,7 +372,62 @@ void zinc_wrapper::add_node_to_scene(std::string geometry_name, std::string coor
 	newMaterial.setAttributeReal(Material::ATTRIBUTE_ALPHA, alpha_);
 
 	if (!nodes.setMaterial(newMaterial)){
-		std::cout << "Surface colour is not set " << std::endl;
+		std::cout << "Node colour is not set " << std::endl;
+	}
+
+	nodes.setVisibilityFlag(true);
+	scene->endChange();
+
+}
+
+
+void zinc_wrapper::add_data_to_scene(std::string geometry_name, std::string coordinate_name, double alpha_, std::string material, float node_size){
+
+	fieldmodule->beginChange();
+
+
+
+
+	const char * geometry_name_char = geometry_name.c_str();
+	const char * coordinate_name_char = coordinate_name.c_str();
+	Field geo_field = fieldmodule->findFieldByName(geometry_name_char);
+	
+	geo_field.isValid();
+	Field coordinates_ = fieldmodule->findFieldByName(coordinate_name_char);
+	//Create material module
+	Materialmodule materialmodule = context->getMaterialmodule();
+	fieldmodule->endChange();
+
+
+
+	scene->beginChange();
+
+
+
+
+	Graphics nodes = scene->createGraphics(Graphics::TYPE_POINTS);
+
+
+
+
+	nodes.setCoordinateField(coordinates_);
+
+	//Set the name to of the graphics surface, this will be set to be geometry_name_surface
+	geometry_name = geometry_name + "data";
+	const char * node_name = geometry_name.c_str();
+	nodes.setName(node_name);
+	nodes.setFieldDomainType(Field::DOMAIN_TYPE_NODES);
+
+	Graphicspointattributes attributes = nodes.getGraphicspointattributes();
+	attributes.setGlyphShapeType(Glyph::SHAPE_TYPE_CROSS);
+	double base_[3] = { node_size, node_size, node_size };
+	attributes.setBaseSize(3, base_);
+
+	Material newMaterial = materialmodule.findMaterialByName(material.c_str());
+	newMaterial.setAttributeReal(Material::ATTRIBUTE_ALPHA, alpha_);
+
+	if (!nodes.setMaterial(newMaterial)){
+		std::cout << "Data colour is not set " << std::endl;
 	}
 
 	nodes.setVisibilityFlag(true);
@@ -408,6 +476,8 @@ void zinc_wrapper::set_window_attributes(double eye_point[3], double look_at[3],
 
 	sceneviewer->setViewAngle(angle);
 	sceneviewer->setLookatPosition(look_at);
+
+
 
 }
 
@@ -569,7 +639,7 @@ void zinc_wrapper::mesh_integrator(std::string geometry_name){
 	FieldConstant one_field = fieldmodule->createFieldConstant(1, &one_);
 	Field coordinates = fieldmodule->findFieldByName("coordinates");
 	FieldMeshIntegral volume_field = fieldmodule->createFieldMeshIntegral(one_field, coordinates, mesh3d);
-
+	
 	//Surface
 	FieldMeshIntegral surface_field = fieldmodule->createFieldMeshIntegral(one_field, coordinates, exterior_mesh);
 
@@ -594,14 +664,7 @@ void zinc_wrapper::mesh_integrator(std::string geometry_name){
 
 
 
-	char volume_string[100];
-	char volume_c[20];
-	char volume_value_string[20];
-	sprintf(volume_string, "%f", volume_out);
-	strcpy(volume_c, "Volume : ");
-	strcpy(volume_value_string, volume_string);
-	strcat(volume_c, volume_value_string);
-
+	std::string volume_string = "Volume : " + std::to_string(volume_out);
 	/*
 	Display volume
 	*/
@@ -611,7 +674,7 @@ void zinc_wrapper::mesh_integrator(std::string geometry_name){
 	Graphicspointattributes	attributes = volume_text_node.getGraphicspointattributes();
 	double offset_[3] = { -0.95, 0.9, 0 };
 	attributes.setLabelOffset(3, offset_);
-	attributes.setLabelText(1, volume_c);
+	attributes.setLabelText(1, volume_string.c_str());
 	attributes.setGlyphShapeType(Glyph::SHAPE_TYPE_INVALID);
 	double size_ = 1;
 	attributes.setBaseSize(1, &size_);
@@ -621,8 +684,6 @@ void zinc_wrapper::mesh_integrator(std::string geometry_name){
 	Display surface area
 	*/
 	std::string surface_string = "Surface area : " + std::to_string(surface_out);
-
-
 	GraphicsPoints surface_text_node = scene->createGraphicsPoints();
 	surface_text_node.setFieldDomainType(Field::DomainType::DOMAIN_TYPE_POINT);
 	surface_text_node.setScenecoordinatesystem(Scenecoordinatesystem::SCENECOORDINATESYSTEM_NORMALISED_WINDOW_FIT_LEFT);
@@ -631,40 +692,96 @@ void zinc_wrapper::mesh_integrator(std::string geometry_name){
 	surface_attributes.setLabelOffset(3, surface_offset_);
 	surface_attributes.setLabelText(1, surface_string.c_str());
 	surface_attributes.setGlyphShapeType(Glyph::SHAPE_TYPE_INVALID);
-	
 	surface_attributes.setBaseSize(1, &size_);
-
 	surface_text_node.setMaterial(context->getMaterialmodule().Materialmodule::findMaterialByName("green"));
 
 
-
+	
 
 
 }
 
 
+void zinc_wrapper::optimise_1d(){
+	//gfx define field found_location find_mesh_location find_nearest mesh mesh1d mesh_field coordinates source_field data_coordinates;
+	Field coordinate_field = fieldmodule->findFieldByName("coordinates");
+	Field datacoordinate_field = fieldmodule->findFieldByName("data_coordinates");
+	Mesh mesh1d = fieldmodule->findMeshByDimension(1);
+	FieldFindMeshLocation found_location = fieldmodule->createFieldFindMeshLocation(datacoordinate_field, coordinate_field, mesh1d); 
+	found_location.setSearchMode(FieldFindMeshLocation::SearchMode::SEARCH_MODE_NEAREST);
 
-//Element elem;
+	/* define a field giving the coordinates at the found_location on the mesh:
+	gfx define field projected_coordinates embedded element_xi found_location field coordinates;*/
+	FieldEmbedded projected_coordinates = fieldmodule->createFieldEmbedded(coordinate_field, found_location);
+	
 
-///*mesh_exterior.destroyElementsConditional(exterior_field);*/
-//Elementiterator el_iterator = mesh.createElementiterator();
-//Fieldcache cache = fieldmodule->createFieldcache();
+    //# define a field which calculates the error vector between the data point and its element project:
+	//gfx define field error_vector add fields data_coordinates projected_coordinates scale_factors 1 - 1;
+	double n_one = -1.0f;
+	Field negative1 = fieldmodule->createFieldConstant(1, &n_one);
+	Field negative_projected_coordinates = fieldmodule->createFieldMultiply(projected_coordinates, negative1);
+	FieldAdd error_vector = fieldmodule->createFieldAdd(datacoordinate_field,negative_projected_coordinates);
 
-//elem = el_iterator.next();
-//
-//while (elem.isValid()){
-//	cache.setElement(elem);
-//	double isexterior;
-//	exterior_field.evaluateReal(cache, 1, &isexterior);
-//	std::cout << isexterior << std::endl;
+	
 
-//	if (isexterior != 1){
-//		//mesh_exterior.addElement(elem);
-//		//elem.
-//		///eee.addElement(elem);
-//		int stat_ = exterior_mesh.addElement(elem);
-//		std::cout << "stat : " << stat_ << std::endl;
-//		//std::cout << "Elem size : " << mesh_exterior.getSize() << std::endl;
-//	}
-//	elem = el_iterator.next();
-//}
+
+	
+	
+	//# get the magnitude of that vector as a measure of error for each data point :
+	//gfx define field error magnitude field error_vector;
+	Field error = fieldmodule->createFieldMagnitude(error_vector);
+
+	//#visualise the error bars :
+	//gfx modify g_element "/" data_points coordinate data_coordinates LOCAL glyph line general size "0*0.1*0.1" centre 0, 0, 0 font default orientation error_vector scale_factors "-1*0*0" select_on material silver selected_material default_selected;
+	Graphics nodes = scene->createGraphics(Graphics::TYPE_POINTS);
+	nodes.setCoordinateField(datacoordinate_field);
+	nodes.setFieldDomainType(Field::DOMAIN_TYPE_NODES);
+
+	Graphicspointattributes attributes = nodes.getGraphicspointattributes();
+	attributes.setGlyphShapeType(Glyph::SHAPE_TYPE_LINE);
+	double base_[3] = {0,0.1,0.1 };
+	attributes.setBaseSize(3, base_);
+	double scale_[3] = { -1, 0, 0 };
+	attributes.setScaleFactors(3, scale_);
+	attributes.setOrientationScaleField(error_vector);
+
+	Material newMaterial = context->getMaterialmodule().findMaterialByName("magenta");
+	newMaterial.setAttributeReal(Material::ATTRIBUTE_ALPHA, 1);
+
+	if (!nodes.setMaterial(newMaterial)){
+		std::cout << "Error optimisation material " << std::endl;
+	}
+
+
+
+	/*
+
+# define a scalar objective function to minimise which is the sum of each of the error terms over the data nodeset:
+	gfx define field objective_function nodeset_sum field error nodeset datapoints;
+
+# define objective function for least-squares method as sum of squared error_vector over the data points
+# (least-squares method works directly with individual terms from sum-of-squares field types like this)
+	gfx define field objective_function_lsq nodeset_sum_squares field error_vector nodeset datapoints;
+
+	# use the quasi - Newton Opt++ method to minimise the objective function field.
+# [this method minimises a scalar valued field by altering the provided independent field(s)]
+	gfx minimise QUASI_NEWTON region "/" objective_fields objective_function independent_fields coordinates hide_output;
+
+		*/
+	Nodeset datapoints = fieldmodule->findNodesetByFieldDomainType(Field::DomainType::DOMAIN_TYPE_NODES);
+	std::cout << datapoints.getSize();
+	FieldNodesetSum objective_function = fieldmodule->createFieldNodesetSum(error, datapoints);
+	FieldNodesetSumSquares objective_function_Sqrt = fieldmodule->createFieldNodesetSumSquares(error_vector, datapoints);
+
+
+
+
+	Optimisation optimisation = fieldmodule->createOptimisation();
+	optimisation.addObjectiveField(objective_function);
+	optimisation.addIndependentField(coordinate_field);
+	optimisation.setMethod(Optimisation::Method::METHOD_QUASI_NEWTON);
+	optimisation.setAttributeInteger(Optimisation::Attribute::ATTRIBUTE_MAXIMUM_ITERATIONS, 1);
+	optimisation.optimise();
+
+	std::cout << optimisation.getSolutionReport() << std::endl;
+}

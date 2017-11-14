@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/cmiss/!svn/ver/10128/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/cmiss_input
+END
+data.exnode
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/cmiss/!svn/ver/9423/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/cmiss_input/data.exnode
+END
+mesh.exelem
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/cmiss/!svn/ver/9423/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/cmiss_input/mesh.exelem
+END
+fitting-1D-linear.com
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/cmiss/!svn/ver/10128/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/cmiss_input/fitting-1D-linear.com
+END
+mesh.exnode
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/cmiss/!svn/ver/9423/cmgui/examples/trunk/a/optimisation/fitting-1D-linear/cmiss_input/mesh.exnode
+END

@@ -28,6 +28,9 @@
 #include "zinc/fieldsubobjectgroup.hpp"
 #include "zinc/fieldgroup.hpp"
 #include "zinc/scenepicker.hpp"
+#include "zinc/fieldarithmeticoperators.hpp"
+#include "zinc/optimisation.hpp"
+#include "zinc/fieldnodesetoperators.hpp"
 
 #include "zinc/stream.h"
 using namespace OpenCMISS::Zinc;
@@ -51,6 +54,9 @@ public:
 	//Read .exelem file
 	void read_exelement(std::string file_name);
 
+	//read data
+	void read_exdata(std::string file_name);
+
 	//Set sceneviewer view port size
 	void set_scene_viewer_size(int width, int height);
 
@@ -64,6 +70,9 @@ public:
 
 	//Add node to scene
 	void add_node_to_scene(std::string geometry_name, std::string coordinate_name, double alpha_, std::string material, float node_size);
+	
+	//Add data to scene
+	void add_data_to_scene(std::string geometry_name, std::string coordinate_name, double alpha_, std::string material, float node_size);
 
 	//Sets and renders scene
 	void render_scene(bool view_all);
@@ -82,6 +91,12 @@ public:
 
 	//Integrator
 	void mesh_integrator(std::string mesh_name);
+
+	//set viewer to 2d 
+	void set_viewer_2d(double up_vector[3]){ sceneviewer->setUpVector( up_vector); }
+
+	//Optimise 1d
+	void optimise_1d();
 
 	//Destructor
 	~zinc_wrapper();
