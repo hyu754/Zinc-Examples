@@ -266,7 +266,19 @@ void zinc_wrapper::add_line_to_scene(std::string geometry_name, std::string coor
 	geometry_name = geometry_name + "surface";
 	const char * surface_name = geometry_name.c_str();
 	lines.setName(surface_name);
-	lines.setRenderLineWidth(line_width);
+	
+	lines.setRenderLineWidth(4);
+	auto tess_mod = context->getTessellationmodule();
+	auto tess_line = tess_mod.createTessellation();
+	int tess_ = 4;
+	tess_line.setMinimumDivisions(1, &tess_);
+	
+	lines.setTessellation(tess_line);
+	
+	//auto attributes_line = lines.getGraphicslineattributes();
+	//double line_size = 4;
+	//attributes_line.setBaseSize(1, &line_size);
+	//
 	//Create material module
 	//Materialmodule materialmodule = context->getMaterialmodule();
 
@@ -781,7 +793,19 @@ void zinc_wrapper::optimise_1d(){
 	optimisation.addIndependentField(coordinate_field);
 	optimisation.setMethod(Optimisation::Method::METHOD_QUASI_NEWTON);
 	optimisation.setAttributeInteger(Optimisation::Attribute::ATTRIBUTE_MAXIMUM_ITERATIONS, 1);
-	optimisation.optimise();
+	
+	int max_it = 10;
+	for (int i = 0; i < max_it; i++){
+
+		optimisation.optimise();
+		this->render_scene(true);
+		std::string file_name_out_ = "iteration" + std::to_string(i)+".jpg";
+		sceneviewer->writeImageToFile(file_name_out_.c_str(),1,1000,1000,1,1);
+
+	}
+	
+	
+	
 
 	std::cout << optimisation.getSolutionReport() << std::endl;
 }

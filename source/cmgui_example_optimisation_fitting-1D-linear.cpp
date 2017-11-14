@@ -111,7 +111,7 @@ int main(int argc, char** argv)
 	zinc_wrapper ZW("region_1");
 	ZW.set_scene_viewer_size(width, height);
 
-	ZW.read_exnode_exelem("mesh");
+	ZW.read_exnode_exelem("mesh_upgrade");
 	ZW.read_exdata("data");
 	//ZW.mesh_integrator("allshapes");
 	ZW.add_line_to_scene("mesh", "coordinates", 1, "white", 1);

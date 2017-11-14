@@ -1,0 +1,46 @@
+ Group name: mesh
+ Shape.  Dimension=1
+ #Scale factor sets= 1
+   c.Hermite, #Scale factors= 4
+ #Nodes=           2
+ #Fields=1
+ 1) coordinates, coordinate, rectangular cartesian, #Components=3
+   x.  c.Hermite, no modify, standard node based.
+     #Nodes= 2
+      1.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   1   2
+      2.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   3   4
+   y.  c.Hermite, no modify, standard node based.
+     #Nodes= 2
+      1.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   1   2
+      2.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   3   4
+   z.  c.Hermite, no modify, standard node based.
+     #Nodes= 2
+      1.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   1   2
+      2.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   3   4
+ Element:            1 0 0
+   Nodes:
+                1            2
+   Scale factors:
+       0.1000000000000000E+01   0.1118033988749871E+01   0.1000000000000000E+01   0.9495294781702601E+00
+ Element:            2 0 0
+   Nodes:
+                2            3
+   Scale factors:
+       0.1000000000000000E+01   0.9495294781702601E+00   0.1000000000000000E+01   0.1874594691760876E+01
+ Element:            3 0 0
+   Nodes:
+                3            4
+   Scale factors:
+       0.1000000000000000E+01   0.1874594691760876E+01   0.1000000000000000E+01   0.2968164415931103E+01
