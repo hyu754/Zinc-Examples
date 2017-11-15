@@ -118,12 +118,14 @@ public:
 	void set_window_attributes(double eye_point[3],double look_at[3], double up_vector[3],double view_angle);
 
 	//Integrator
+	//TODO: MAKE MODULAR
 	void mesh_integrator(std::string mesh_name);
 
 	//set viewer to 2d 
 	void set_viewer_2d(double up_vector[3]){ sceneviewer->setUpVector( up_vector); }
 
 	//Optimise 1d
+	//TODO: MAKE MODULAR
 	void optimise_1d();
 
 	//Destructor
