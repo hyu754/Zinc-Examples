@@ -31,19 +31,47 @@
 #include "zinc/fieldarithmeticoperators.hpp"
 #include "zinc/optimisation.hpp"
 #include "zinc/fieldnodesetoperators.hpp"
-
+#include "zinc/fieldderivatives.hpp"
+#include "zinc/fieldcomposite.hpp"
 #include "zinc/stream.h"
 using namespace OpenCMISS::Zinc;
 class zinc_wrapper
 {
 public:
-	enum material_wrapper{
-		TRANSPARENT_BLUE
-	};
+	
+
+	//Common fields
+	struct _common_fields_
+	{
+		//Common fields
+		Field zero;
+		Field one;
+		Field negative_one;
+		Field identity_3x3;//TODO
+	} common_fields;
+	
+	//Common colours
+	struct _common_materials_
+	{
+
+		Material blue;
+		Material red;
+		Material green;
+		Material magenta;
+		Material purple;
+		Material gold;
+	} common_materials;
+
 	
 	//Constructor
 	zinc_wrapper();
 	zinc_wrapper(std::string context_name);
+
+	//Initialize some common fields
+	void initialize_common_fields();
+
+	//Initialize some common materials
+	void initialize_common_materials();
 
 	//Read a file with .exfile extension, and add to context
 	void read_exfile(std::string file_name);
@@ -117,6 +145,10 @@ private:
 
 	//Width and height of the iamge
 	float width, height;
+
+	
+
+
 };
 
 

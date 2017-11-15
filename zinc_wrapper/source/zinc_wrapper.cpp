@@ -10,6 +10,9 @@ zinc_wrapper::zinc_wrapper()
 	//NEED TO ADD CONSTRUCTOR
 	//
 	std::cout << "Zinc wrapper class initialized" << std::endl;
+
+	//Initialize common fields
+	initialize_common_fields();
 }
 
 //Zinc wrapper constructor with context name
@@ -47,7 +50,13 @@ zinc_wrapper::zinc_wrapper(std::string context_name)
 	////Create a scene
 	//scene = new Scene;
 	//*scene = region->getScene();
+
+	//Initialize common fields and materials
+	initialize_common_fields();
+	initialize_common_materials();
+
 }
+
 
 //Zinc wrapper destructor
 zinc_wrapper::~zinc_wrapper()
@@ -62,6 +71,24 @@ zinc_wrapper::~zinc_wrapper()
 	delete sceneviewer;
 }
 
+void zinc_wrapper::initialize_common_materials(){
+
+	common_materials.blue = context->getMaterialmodule().findMaterialByName("blue");
+	common_materials.gold = context->getMaterialmodule().findMaterialByName("gold");
+	common_materials.green = context->getMaterialmodule().findMaterialByName("green");
+
+}
+void zinc_wrapper::initialize_common_fields(){
+	double zero_ = 0.0;
+	double one_ = 1.0;
+	double negative1_ = -1.0;
+	common_fields.zero = fieldmodule->createFieldConstant(1, &zero_);
+	common_fields.one = fieldmodule->createFieldConstant(1, &one_);
+	common_fields.negative_one = fieldmodule->createFieldConstant(1, &negative1_);
+
+		
+	
+}
 
 //Read a file with .exfile extension, and add to context
 void zinc_wrapper::read_exfile(std::string file_name){
@@ -734,7 +761,7 @@ void zinc_wrapper::optimise_1d(){
 	Field negative_projected_coordinates = fieldmodule->createFieldMultiply(projected_coordinates, negative1);
 	FieldAdd error_vector = fieldmodule->createFieldAdd(datacoordinate_field,negative_projected_coordinates);
 
-	
+	FieldDerivative field_derivative= fieldmodule->createFieldDerivative(coordinate_field,1);
 
 
 	
@@ -763,6 +790,64 @@ void zinc_wrapper::optimise_1d(){
 	if (!nodes.setMaterial(newMaterial)){
 		std::cout << "Error optimisation material " << std::endl;
 	}
+
+	//Draw some normal and tangent vectors
+	//NOTE: ASSUME normal.y = 0
+	/*
+	
+	#display tangent and normal vectors
+	gfx def field d_ds1 node_value fe_field coordinates d / ds1
+		gfx def field d_ds1_normal normal field d_ds1
+
+		# normal.y = 0
+		gfx define field n1 constant 1
+		gfx define field n2 constant 0
+
+		gfx define field v1_positive component d_ds1.x
+		gfx define field negative constant - 1
+		gfx define field v1 multiply field negative v1_positive
+		gfx define field v3 component d_ds1.z
+
+		gfx define field n3 divide fields v1 v3
+		gfx define field normal composite n1 n2 n3
+		gfx define field normalnormal normal field normal
+	*/
+	
+	FieldNodeValue d_ds1 =fieldmodule->createFieldNodeValue(coordinate_field, Node::ValueLabel::VALUE_LABEL_D_DS1, 1);
+
+	Field d_ds1_normalise = fieldmodule->createFieldNormalise(d_ds1);
+	FieldComponent v1_positive = fieldmodule->createFieldComponent(d_ds1_normalise, 3);
+	Field v1_negative = fieldmodule->createFieldMultiply(v1_positive, common_fields.negative_one);
+	FieldComponent v3 = fieldmodule->createFieldComponent(d_ds1_normalise, 1);
+	Field n3 = fieldmodule->createFieldDivide(v1_negative, v3);
+
+	Field n1 = common_fields.one;
+	Field n2 = common_fields.zero;
+	Field normal_vec_[3] = { n1, n2, n3 };
+	Field normal_vector = fieldmodule->createFieldConcatenate(3, normal_vec_);
+	Field norm_normal_vector = fieldmodule->createFieldNormalise(normal_vector);
+
+	Graphics g_dds1 = scene->createGraphicsPoints();
+	g_dds1.setCoordinateField(coordinate_field);
+	g_dds1.setFieldDomainType(Field::DomainType::DOMAIN_TYPE_NODES);
+	auto g_dds1_attributes = g_dds1.getGraphicspointattributes();
+	
+	g_dds1_attributes.setGlyphShapeType(Glyph::ShapeType::SHAPE_TYPE_ARROW_SOLID);
+	g_dds1_attributes.setOrientationScaleField(d_ds1_normalise);
+	double dds1_size[3] = { 0.1, 0.01, 0.01 };
+	g_dds1_attributes.setBaseSize(3, dds1_size);
+	g_dds1.setMaterial(common_materials.gold);
+	g_dds1.setVisibilityFlag(false);
+	Graphics g_normal = scene->createGraphicsPoints();
+	g_normal.setCoordinateField(coordinate_field);
+	g_normal.setFieldDomainType(Field::DOMAIN_TYPE_NODES);
+	auto g_normal_attributes = g_normal.getGraphicspointattributes();
+
+	g_normal_attributes.setGlyphShapeType(Glyph::ShapeType::SHAPE_TYPE_ARROW_SOLID);
+	g_normal_attributes.setOrientationScaleField(norm_normal_vector);
+	
+	g_normal_attributes.setBaseSize(3, dds1_size);
+	g_normal.setMaterial(context->getMaterialmodule().findMaterialByName("blue"));
 
 
 
@@ -794,7 +879,7 @@ void zinc_wrapper::optimise_1d(){
 	optimisation.setMethod(Optimisation::Method::METHOD_QUASI_NEWTON);
 	optimisation.setAttributeInteger(Optimisation::Attribute::ATTRIBUTE_MAXIMUM_ITERATIONS, 1);
 	
-	int max_it = 10;
+	int max_it = 5;
 	for (int i = 0; i < max_it; i++){
 
 		optimisation.optimise();
