@@ -3,10 +3,10 @@ if (! defined $example) {
 }
 
 # read in the data to be fit to
-gfx read data "$example/data.exnode";
+gfx read data "$example/surface_nodes_circle.exnode";
 # and the initial mesh
-gfx read nodes "$example/mesh_upgrade.exnode";
-gfx read nodes "$example/mesh_upgrade.exelem";
+gfx read nodes "$example/mesh_circle.exnode";
+gfx read nodes "$example/mesh_circle.exelem";
 
 # draw the mesh
 gfx modify g_element "/" general clear;

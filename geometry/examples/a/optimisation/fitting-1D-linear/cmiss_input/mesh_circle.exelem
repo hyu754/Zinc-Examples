@@ -1,0 +1,111 @@
+ Group name: mesh
+ Shape.  Dimension=1
+ #Scale factor sets= 1
+   c.Hermite, #Scale factors= 4
+ #Nodes=           2
+ #Fields=1
+ 1) coordinates, coordinate, rectangular cartesian, #Components=3
+   x.  c.Hermite, no modify, standard node based.
+     #Nodes= 2
+      1.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   1   2
+      2.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   3   4
+   y.  c.Hermite, no modify, standard node based.
+     #Nodes= 2
+      1.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   1   2
+      2.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   3   4
+   z.  c.Hermite, no modify, standard node based.
+     #Nodes= 2
+      1.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   1   2
+      2.  #Values=2
+       Value indices:     1   2
+       Scale factor indices:   3   4
+ Element:            1 0 0
+   Nodes:
+                1            9
+   Scale factors:
+       0.1000000000000000E+01   0.2699912529963160E+00   0.1000000000000000E+01   0.2720139053104115E+00
+ Element:            2 0 0
+   Nodes:
+                2           10
+   Scale factors:
+       0.1000000000000000E+01   0.2699912529963160E+00   0.1000000000000000E+01   0.2720139053104115E+00
+ Element:            3 0 0
+   Nodes:
+                4           11
+   Scale factors:
+       0.1000000000000000E+01   0.2699912529963159E+00   0.1000000000000000E+01   0.2720139053104115E+00
+ Element:            4 0 0
+   Nodes:
+                3           12
+   Scale factors:
+       0.1000000000000000E+01   0.2699912529963160E+00   0.1000000000000000E+01   0.2720139053104115E+00
+ Element:            5 0 0
+   Nodes:
+                5           13
+   Scale factors:
+       0.1000000000000000E+01   0.2740365576245075E+00   0.1000000000000000E+01   0.2720139053104120E+00
+ Element:            6 0 0
+   Nodes:
+                6           14
+   Scale factors:
+       0.1000000000000000E+01   0.2740365576245075E+00   0.1000000000000000E+01   0.2720139053104120E+00
+ Element:            7 0 0
+   Nodes:
+                7           15
+   Scale factors:
+       0.1000000000000000E+01   0.2740365576245075E+00   0.1000000000000000E+01   0.2720139053104121E+00
+ Element:            8 0 0
+   Nodes:
+                8           16
+   Scale factors:
+       0.1000000000000000E+01   0.2740365576245075E+00   0.1000000000000000E+01   0.2720139053104120E+00
+ Element:            9 0 0
+   Nodes:
+                9            5
+   Scale factors:
+       0.1000000000000000E+01   0.2720139053104119E+00   0.1000000000000000E+01   0.2740365576245075E+00
+ Element:           10 0 0
+   Nodes:
+               10            6
+   Scale factors:
+       0.1000000000000000E+01   0.2720139053104118E+00   0.1000000000000000E+01   0.2740365576245075E+00
+ Element:           11 0 0
+   Nodes:
+               11            7
+   Scale factors:
+       0.1000000000000000E+01   0.2720139053104118E+00   0.1000000000000000E+01   0.2740365576245075E+00
+ Element:           12 0 0
+   Nodes:
+               12            8
+   Scale factors:
+       0.1000000000000000E+01   0.2720139053104118E+00   0.1000000000000000E+01   0.2740365576245075E+00
+ Element:           13 0 0
+   Nodes:
+               13            2
+   Scale factors:
+       0.1000000000000000E+01   0.2720139053104120E+00   0.1000000000000000E+01   0.2699912529963163E+00
+ Element:           14 0 0
+   Nodes:
+               14            4
+   Scale factors:
+       0.1000000000000000E+01   0.2720139053104120E+00   0.1000000000000000E+01   0.2699912529963162E+00
+ Element:           15 0 0
+   Nodes:
+               15            3
+   Scale factors:
+       0.1000000000000000E+01   0.2720139053104120E+00   0.1000000000000000E+01   0.2699912529963163E+00
+ Element:           16 0 0
+   Nodes:
+               16            1
+   Scale factors:
+       0.1000000000000000E+01   0.2720139053104120E+00   0.1000000000000000E+01   0.2699912529963164E+00

@@ -111,12 +111,12 @@ int main(int argc, char** argv)
 	zinc_wrapper ZW("region_1");
 	ZW.set_scene_viewer_size(width, height);
 
-	ZW.read_exnode_exelem("mesh_upgrade");
-	ZW.read_exdata("data");
+	ZW.read_exnode_exelem("mesh_circle");
+	ZW.read_exdata("surface_nodes_circle");
 	//ZW.mesh_integrator("allshapes");
-	ZW.add_line_to_scene("mesh", "coordinates", 1, "white", 1);
-	ZW.add_node_to_scene("mesh", "coordinates", 1, "orange", 0.1);
-	ZW.add_data_to_scene("", "data_coordinates", 1, "orange", 0.1);
+	ZW.add_line_to_scene("mesh_circle", "coordinates", 1, "white", 1);
+	ZW.add_node_to_scene("mesh_circle", "coordinates", 1, "orange", 0.1);
+	ZW.add_data_to_scene("", "data_coordinates", 1, "orange", 0.5);
 	//ZW.add_surface_to_scene("allshapes", "coordinates", 0.2, "blue");
 	
 	
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
 	//ZW.set_background_colour(1, 0, 0);
 	double up_vec[3] = { 1,0,0 };
 	double eye_point[3] = { 0, 0, 0 };
-	double look_at[3] = { 0, -1, 0 };
+	double look_at[3] = { 0, 0, -1 };
 	double up_vector[3] = { 1, 0, 0 };
 	double angle = 0;
 	//Look at the x-z plane

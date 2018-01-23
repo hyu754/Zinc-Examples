@@ -116,6 +116,14 @@ void zinc_wrapper::read_exnode_exelem(std::string file_name){
 	region->readFile(file_name_char_node);
 	region->readFile(file_name_char_elem);
 
+	//Find reference coordinates
+	Field coordinate_field = fieldmodule->findFieldByName("coordinates");
+	std::string ref_string = "reference_coordinates";
+	coordinate_field.setName(ref_string.c_str());
+
+	region->readFile(file_name_char_node);
+	region->readFile(file_name_char_elem);
+
 
 }
 
@@ -648,7 +656,7 @@ void zinc_wrapper::mesh_integrator(std::string geometry_name){
 
 	//Find faces
 	Mesh mesh = fieldmodule->findMeshByDimension(2);
-
+	
 	FieldGroup groupfield = fieldmodule->createFieldGroup();
 
 	FieldElementGroup egroup = fieldmodule->createFieldElementGroup(mesh);
@@ -744,6 +752,8 @@ void zinc_wrapper::mesh_integrator(std::string geometry_name){
 void zinc_wrapper::optimise_1d(){
 	//gfx define field found_location find_mesh_location find_nearest mesh mesh1d mesh_field coordinates source_field data_coordinates;
 	Field coordinate_field = fieldmodule->findFieldByName("coordinates");
+	Field reference_coordinate_field = fieldmodule->findFieldByName("reference_coordinates");
+	
 	Field datacoordinate_field = fieldmodule->findFieldByName("data_coordinates");
 	Mesh mesh1d = fieldmodule->findMeshByDimension(1);
 	FieldFindMeshLocation found_location = fieldmodule->createFieldFindMeshLocation(datacoordinate_field, coordinate_field, mesh1d); 
@@ -842,7 +852,7 @@ void zinc_wrapper::optimise_1d(){
 	g_normal.setCoordinateField(coordinate_field);
 	g_normal.setFieldDomainType(Field::DOMAIN_TYPE_NODES);
 	auto g_normal_attributes = g_normal.getGraphicspointattributes();
-
+	g_normal.setVisibilityFlag(false);
 	g_normal_attributes.setGlyphShapeType(Glyph::ShapeType::SHAPE_TYPE_ARROW_SOLID);
 	g_normal_attributes.setOrientationScaleField(norm_normal_vector);
 	
@@ -870,24 +880,46 @@ void zinc_wrapper::optimise_1d(){
 	FieldNodesetSum objective_function = fieldmodule->createFieldNodesetSum(error, datapoints);
 	FieldNodesetSumSquares objective_function_Sqrt = fieldmodule->createFieldNodesetSumSquares(error_vector, datapoints);
 
+	//Add smoothing
+	//gfx define field displacement add fields coordinates reference_coordinates scale_factors 1 - 1;
+	FieldMultiply neg_ref_coord = fieldmodule->createFieldMultiply(reference_coordinate_field, common_fields.negative_one);
+	FieldAdd displacement = fieldmodule->createFieldAdd(coordinate_field, neg_ref_coord);
+	//gfx define field displacement_gradient gradient field displacement coordinate reference_coordinates;
+	FieldGradient displacement_gradient = fieldmodule->createFieldGradient(coordinate_field, coordinate_field);
+	
+	/*
+	gfx define field alpha constant $alpha $alpha $alpha $alpha $alpha $alpha $alpha $alpha $alpha;
+	gfx define field scaled_displacement_gradient multiply fields displacement_gradient alpha;
+	*/
+	double alpha_vec[9] = { 0.2, 0.2, 0.2};
+	FieldConstant alpha = fieldmodule->createFieldConstant(3, alpha_vec);
+	std::cout <<"Num comp:"<<displacement.getNumberOfComponents();
+	FieldMultiply scaled_displacement_gradient = fieldmodule->createFieldMultiply(displacement, alpha);
 
-
+	//gfx define field volume_smoothing_objective mesh_integral_squares integrand_field total_smoothing coordinate reference_coordinates mesh mesh3d gaussian_quadrature numbers_of_points "4";
+	FieldMeshIntegralSquares volume_smoothing_objective = fieldmodule->createFieldMeshIntegralSquares(scaled_displacement_gradient, reference_coordinate_field, mesh1d);
+	
 
 	Optimisation optimisation = fieldmodule->createOptimisation();
-	optimisation.addObjectiveField(objective_function);
+	optimisation.addObjectiveField(objective_function_Sqrt);
+	optimisation.addObjectiveField(scaled_displacement_gradient);
 	optimisation.addIndependentField(coordinate_field);
-	optimisation.setMethod(Optimisation::Method::METHOD_QUASI_NEWTON);
+	optimisation.setMethod(Optimisation::Method::METHOD_LEAST_SQUARES_QUASI_NEWTON);
 	optimisation.setAttributeInteger(Optimisation::Attribute::ATTRIBUTE_MAXIMUM_ITERATIONS, 1);
 	
 	int max_it = 5;
-	for (int i = 0; i < max_it; i++){
+	int i;
+	for ( i= 0; i < max_it; i++){
 
-		optimisation.optimise();
 		this->render_scene(true);
 		std::string file_name_out_ = "iteration" + std::to_string(i)+".jpg";
-		sceneviewer->writeImageToFile(file_name_out_.c_str(),1,1000,1000,1,1);
+		sceneviewer->writeImageToFile(file_name_out_.c_str(), 1, 1000, 1000, 1, 1);
+		optimisation.optimise();
+		
 
 	}
+	std::string file_name_out_ = "iteration" + std::to_string(i) + ".jpg";
+	sceneviewer->writeImageToFile(file_name_out_.c_str(), 1, 1000, 1000, 1, 1);
 	
 	
 	
