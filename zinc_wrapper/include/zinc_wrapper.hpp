@@ -7,34 +7,36 @@
 #include <vector>
 #include <string>
 
-#include "zinc/context.hpp"
-#include "zinc/element.hpp"
-#include "zinc/field.hpp"
-#include "zinc/fieldcache.hpp"
-#include "zinc/fieldmodule.hpp"
-#include "zinc/fieldimage.hpp"
+#include "opencmiss/zinc/context.hpp"
+#include "opencmiss/zinc/element.hpp"
+#include "opencmiss/zinc/field.hpp"
+#include "opencmiss/zinc/fieldcache.hpp"
+#include "opencmiss/zinc/fieldmodule.hpp"
+#include "opencmiss/zinc/fieldimage.hpp"
 
-#include <zinc/fieldvectoroperators.hpp>
-#include "zinc/region.hpp"
-#include "zinc/sceneviewer.hpp"
-#include "zinc/scene.hpp"
-#include "zinc/streamimage.hpp"
-#include "zinc/streamscene.hpp"
-#include "zinc/fieldconstant.hpp"
-#include "zinc/fieldlogicaloperators.hpp"
-#include "zinc/fieldmatrixoperators.hpp"
-#include "zinc/fieldmeshoperators.hpp"
-#include "zinc/fieldfiniteelement.hpp"
-#include "zinc/fieldsubobjectgroup.hpp"
-#include "zinc/fieldgroup.hpp"
-#include "zinc/scenepicker.hpp"
-#include "zinc/fieldarithmeticoperators.hpp"
-#include "zinc/optimisation.hpp"
-#include "zinc/fieldnodesetoperators.hpp"
-#include "zinc/fieldderivatives.hpp"
-#include "zinc/fieldcomposite.hpp"
-#include "zinc/stream.h"
+#include <opencmiss/zinc/fieldvectoroperators.hpp>
+#include "opencmiss/zinc/region.hpp"
+#include "opencmiss/zinc/sceneviewer.hpp"
+#include "opencmiss/zinc/scene.hpp"
+#include "opencmiss/zinc/streamimage.hpp"
+#include "opencmiss/zinc/streamscene.hpp"
+#include "opencmiss/zinc/fieldconstant.hpp"
+#include "opencmiss/zinc/fieldlogicaloperators.hpp"
+#include "opencmiss/zinc/fieldmatrixoperators.hpp"
+#include "opencmiss/zinc/fieldmeshoperators.hpp"
+#include "opencmiss/zinc/fieldfiniteelement.hpp"
+#include "opencmiss/zinc/fieldsubobjectgroup.hpp"
+#include "opencmiss/zinc/fieldgroup.hpp"
+#include "opencmiss/zinc/scenepicker.hpp"
+#include "opencmiss/zinc/fieldarithmeticoperators.hpp"
+#include "opencmiss/zinc/optimisation.hpp"
+#include "opencmiss/zinc/fieldnodesetoperators.hpp"
+#include "opencmiss/zinc/fieldderivatives.hpp"
+#include "opencmiss/zinc/fieldcomposite.hpp"
+#include "opencmiss/zinc/stream.h"
 using namespace OpenCMISS::Zinc;
+
+
 class zinc_wrapper
 {
 public:
